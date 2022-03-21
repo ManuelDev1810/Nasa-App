@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSpirits } from "../../reducers/spirit";
 import { columns } from "../../constans/columns";
 import { filterReducer, initialState } from "../../common/filterReducer";
+import { Typography } from "@mui/material";
 
 let isInitial = true;
 
@@ -14,21 +15,21 @@ export default function Spirit() {
   const data = useSelector((state) => state.spirits);
   const dispatch = useDispatch();
 
-  const [checked, setChecked] = useState(null);
+  const [checked, setChecked] = useState('null');
   const [loading, setLoading] = useState(false);
   const [filterState, setFilterState] = useReducer(filterReducer, initialState);
 
-  const onLocalStorageChange = useCallback(() => {
-    if (checked) {
+  const localStorageChange = useCallback(() => {
+    if (checked === 'true') {
       localStorage.setItem("spirit", JSON.stringify(filterState.filters));
-    } else if (checked === false) {
+    } else if (checked === 'false') {
       localStorage.removeItem("spirit");
     }
   }, [checked, filterState]);
 
   const getInitialStorage = useCallback(() => {
     let filter = JSON.parse(localStorage.getItem("spirit"));
-    if (filter) setChecked(true);
+    if (filter) setChecked('true');
     setFilterState({ type: "initial", payload: filter });
   }, []);
 
@@ -43,8 +44,8 @@ export default function Spirit() {
       isInitial = false;
       return;
     }
-    onLocalStorageChange();
-  }, [checked, onLocalStorageChange]);
+    localStorageChange();
+  }, [checked, localStorageChange]);
 
   useEffect(() => {
     (async () => {
@@ -62,35 +63,45 @@ export default function Spirit() {
   }, []);
 
   const onSwitchChange = useCallback(() => {
-    if (checked) {
-      setChecked(false);
+    if (checked === "true") {
+      setChecked("false");
     } else {
-      setChecked(true);
+      setChecked("true");
     }
   }, [checked]);
 
   return (
     <Box>
-      <FormControlLabel
-        control={
-          <Switch
-            checked={checked}
-            onChange={() => onSwitchChange()}
-            inputProps={{ "aria-label": "controlled" }}
-          />
-        }
-        label="Store Filters"
-      />
-
-      <DataGrid
-        sx={{ width: 800 }}
-        rows={data.spirits}
-        columns={columns}
-        filterMode="server"
-        onFilterModelChange={onFilterChange}
-        loading={loading}
-        pageSize={25}
-      />
-    </Box>
+    {data.spirits && data.spirits.length > 0 ? (
+      <>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={checked === "true" ? true : false}
+              onChange={() => onSwitchChange()}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+          }
+          label="Store Filters"
+        />
+        <DataGrid
+          sx={{ width: 800 }}
+          rows={data.spirits}
+          columns={columns}
+          filterMode="server"
+          onFilterModelChange={onFilterChange}
+          loading={loading}
+          pageSize={25}
+        />
+      </>
+    ) : (
+      <>
+        <Typography align={"center"}>Loading.....</Typography>
+        <Typography>
+          if data is not available in a few seconds "The API might be failing"
+        </Typography>
+      </>
+    )}
+  </Box>
   );
 }
