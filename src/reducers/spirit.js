@@ -5,13 +5,14 @@ const initialState = {
   spirits: [],
 };
 
-export const getSpirits = createAsyncThunk("spirit/getSpirits", async (filters) => {
-  const response = await fetch(
-    `${SPIRIT_API}${filters}`
-  );
-  const data = await response.json();
-  return data;
-});
+export const getSpirits = createAsyncThunk(
+  "spirit/getSpirits",
+  async (filters) => {
+    const response = await fetch(`${SPIRIT_API}${filters}`);
+    const data = await response.json();
+    return data;
+  }
+);
 
 export const spiritSlice = createSlice({
   name: "spirits",
@@ -21,6 +22,8 @@ export const spiritSlice = createSlice({
     //Spirits
     builder.addCase(getSpirits.fulfilled, (state, action) => {
       const spirits = action.payload.photos;
+      //Sorting the latest photos
+      spirits.sort((a, b) => b.id - a.id);
       state.spirits = spirits;
     });
     builder.addCase(getSpirits.rejected, (state, action) => {

@@ -21,6 +21,8 @@ export const curiositySlice = createSlice({
     //Curiosities
     builder.addCase(getCuriosities.fulfilled, (state, action) => {
       const curiosities = action.payload.photos;
+      //Sorting the latest photos
+      curiosities.sort((a, b) => b.id - a.id);
       state.curiosities = curiosities;
     });
     builder.addCase(getCuriosities.rejected, (state, action) => {
