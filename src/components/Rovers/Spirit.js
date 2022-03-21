@@ -18,7 +18,7 @@ export default function Spirit() {
   const [loading, setLoading] = useState(false);
   const [filterState, setFilterState] = useReducer(filterReducer, initialState);
 
-  const handleChange = useCallback(() => {
+  const onLocalStorageChange = useCallback(() => {
     if (checked) {
       localStorage.setItem("spirit", JSON.stringify(filterState.filters));
     } else if (checked === false) {
@@ -43,8 +43,8 @@ export default function Spirit() {
       isInitial = false;
       return;
     }
-    handleChange();
-  }, [checked, handleChange]);
+    onLocalStorageChange();
+  }, [checked, onLocalStorageChange]);
 
   useEffect(() => {
     (async () => {
@@ -61,7 +61,7 @@ export default function Spirit() {
     });
   }, []);
 
-  const onSwitchHandler = useCallback(() => {
+  const onSwitchChange = useCallback(() => {
     if (checked) {
       setChecked(false);
     } else {
@@ -75,7 +75,7 @@ export default function Spirit() {
         control={
           <Switch
             checked={checked}
-            onChange={() => onSwitchHandler()}
+            onChange={() => onSwitchChange()}
             inputProps={{ "aria-label": "controlled" }}
           />
         }

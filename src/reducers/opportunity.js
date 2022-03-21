@@ -24,6 +24,9 @@ export const opportunitySlice = createSlice({
       const opportunities = action.payload.photos;
       state.opportunities = opportunities;
     });
+    builder.addCase(getOpportunities.rejected, (state, action) => {
+      state.opportunities = [];
+    });
   },
 });
 

@@ -23,6 +23,9 @@ export const spiritSlice = createSlice({
       const spirits = action.payload.photos;
       state.spirits = spirits;
     });
+    builder.addCase(getSpirits.rejected, (state, action) => {
+      state.spirits = [];
+    });
   },
 });
 

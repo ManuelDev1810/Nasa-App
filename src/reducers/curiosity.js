@@ -23,6 +23,9 @@ export const curiositySlice = createSlice({
       const curiosities = action.payload.photos;
       state.curiosities = curiosities;
     });
+    builder.addCase(getCuriosities.rejected, (state, action) => {
+      state.curiosities = [];
+    });
   },
 });
 
