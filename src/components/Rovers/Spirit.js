@@ -10,48 +10,48 @@ import useFilter from "../../hooks/use-filter";
 import LoadingMessage from "../UI/LoadingMessage";
 
 export default function Spirit() {
-  const data = useSelector((state) => state.spirits);
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const { checked, onFilterChange, onSwitchChange, filterState } = useFilter({
-    localStorageName: "spirit",
-  });
+    const data = useSelector((state) => state.spirits);
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+    const { checked, onFilterChange, onSwitchChange, filterState } = useFilter({
+        localStorageName: "spirit",
+    });
 
-  useEffect(() => {
-    (async () => {
-      setLoading(true);
-      await dispatch(getSpirits(filterState.filters.join("")));
-      setLoading(false);
-    })();
-  }, [dispatch, filterState]);
+    useEffect(() => {
+        (async () => {
+            setLoading(true);
+            await dispatch(getSpirits(filterState.filters.join("")));
+            setLoading(false);
+        })();
+    }, [dispatch, filterState]);
 
-  return (
-    <Box>
-      {data.spirits && data.spirits.length > 0 ? (
-        <>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={checked === "true" ? true : false}
-                onChange={() => onSwitchChange()}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-            }
-            label="Store Filters"
-          />
-          <DataGrid
-            sx={{ width: 800 }}
-            rows={data.spirits}
-            columns={columns}
-            filterMode="server"
-            onFilterModelChange={onFilterChange}
-            loading={loading}
-            pageSize={25}
-          />
-        </>
-      ) : (
-        <LoadingMessage />
-      )}
-    </Box>
-  );
+    return (
+        <Box>
+            {data.spirits && data.spirits.length > 0 ? (
+                <>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={checked === "true" ? true : false}
+                                onChange={() => onSwitchChange()}
+                                inputProps={{ "aria-label": "controlled" }}
+                            />
+                        }
+                        label="Store Filters"
+                    />
+                    <DataGrid
+                        sx={{ width: 800 }}
+                        rows={data.spirits}
+                        columns={columns}
+                        filterMode="server"
+                        onFilterModelChange={onFilterChange}
+                        loading={loading}
+                        pageSize={25}
+                    />
+                </>
+            ) : (
+                <LoadingMessage />
+            )}
+        </Box>
+    );
 }

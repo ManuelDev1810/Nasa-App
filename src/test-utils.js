@@ -10,30 +10,30 @@ import { spiritSlice } from "./reducers/spirit";
 import { BrowserRouter } from "react-router-dom";
 
 function render(
-  ui,
-  {
-    preloadedState,
-    store = configureStore({
-      reducer: {
-        spirits: spiritSlice.reducer,
-        curiosities: curiositySlice.reducer,
-        opportunities: opportunitySlice.reducer,
-      },
-      preloadedState,
-    }),
-    ...renderOptions
-  } = {},
-  { route = "/" } = {}
+    ui,
+    {
+        preloadedState,
+        store = configureStore({
+            reducer: {
+                spirits: spiritSlice.reducer,
+                curiosities: curiositySlice.reducer,
+                opportunities: opportunitySlice.reducer,
+            },
+            preloadedState,
+        }),
+        ...renderOptions
+    } = {},
+    { route = "/" } = {}
 ) {
-  function Wrapper({ children }) {
-    window.history.pushState({}, "Test page", route);
-    return (
-      <BrowserRouter>
-        <Provider store={store}>{children}</Provider>
-      </BrowserRouter>
-    );
-  }
-  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
+    function Wrapper({ children }) {
+        window.history.pushState({}, "Test page", route);
+        return (
+            <BrowserRouter>
+                <Provider store={store}>{children}</Provider>
+            </BrowserRouter>
+        );
+    }
+    return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
 }
 
 // re-export everything
