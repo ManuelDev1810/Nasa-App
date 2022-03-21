@@ -6,8 +6,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { useDispatch, useSelector } from "react-redux";
 import { getSpirits } from "../../reducers/spirit";
 import { columns } from "../../constans/columns";
-import { Typography } from "@mui/material";
 import useFilter from "../../hooks/use-filter";
+import LoadingMessage from "../UI/LoadingMessage";
 
 export default function Spirit() {
   const data = useSelector((state) => state.spirits);
@@ -50,12 +50,7 @@ export default function Spirit() {
           />
         </>
       ) : (
-        <>
-          <Typography align={"center"}>Loading.....</Typography>
-          <Typography>
-            if data is not available in a few seconds "The API might be failing"
-          </Typography>
-        </>
+        <LoadingMessage />
       )}
     </Box>
   );
