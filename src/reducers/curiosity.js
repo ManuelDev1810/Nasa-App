@@ -5,13 +5,14 @@ const initialState = {
   curiosities: [],
 };
 
-export const getCuriosities = createAsyncThunk("curiosity/getCuriosities", async (filters) => {
-  const response = await fetch(
-    `${CURIOSITY_API}${filters}`
-  );
-  const data = await response.json();
-  return data;
-});
+export const getCuriosities = createAsyncThunk(
+  "curiosity/getCuriosities",
+  async (filters) => {
+    const response = await fetch(`${CURIOSITY_API}${filters}`);
+    const data = await response.json();
+    return data;
+  }
+);
 
 export const curiositySlice = createSlice({
   name: "curiosities",
