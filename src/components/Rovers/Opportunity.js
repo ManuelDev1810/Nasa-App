@@ -6,8 +6,8 @@ import Switch from "@mui/material/Switch";
 import { useDispatch, useSelector } from "react-redux";
 import { getOpportunities } from "../../reducers/opportunity";
 import { columns } from "../../constans/columns";
-import { Typography } from "@mui/material";
 import useFilter from "../../hooks/use-filter";
+import LoadingMessage from "../UI/LoadingMessage";
 
 export default function Spirit() {
   const data = useSelector((state) => state.opportunities);
@@ -51,12 +51,7 @@ export default function Spirit() {
           />
         </>
       ) : (
-        <>
-          <Typography align={"center"}>Loading.....</Typography>
-          <Typography>
-            if data is not available in a few seconds "The API might be failing"
-          </Typography>
-        </>
+        <LoadingMessage />
       )}
     </Box>
   );
