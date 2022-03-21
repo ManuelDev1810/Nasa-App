@@ -4,11 +4,13 @@ import Navigation from "./components/Navigation/Navigation";
 import Curiosity from "./components/Rovers/Curiosity";
 import Opportunity from "./components/Rovers/Opportunity";
 import Spirit from "./components/Rovers/Spirit";
+import InfoMessage from './components/UI/InfoMessage';
 
 function App() {
   return (
     <div>
       <Navigation />
+      <InfoMessage>THE DEFAULT FILTER IS SOL = 1000</InfoMessage>
       <Box
         sx={{
           marginTop: 2,
