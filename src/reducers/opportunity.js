@@ -22,6 +22,8 @@ export const opportunitySlice = createSlice({
     //Opportunities
     builder.addCase(getOpportunities.fulfilled, (state, action) => {
       const opportunities = action.payload.photos;
+      //Sorting the latest photos
+      opportunities.sort((a, b) => b.id - a.id);
       state.opportunities = opportunities;
     });
     builder.addCase(getOpportunities.rejected, (state, action) => {
