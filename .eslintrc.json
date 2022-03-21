@@ -26,13 +26,10 @@
     "rules": {
         "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
+        "linebreak-style": "off",
         "indent": [
             "error",
             4
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
         ],
         "quotes": [
             "error",
