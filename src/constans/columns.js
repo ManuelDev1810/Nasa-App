@@ -2,9 +2,15 @@ import {getGridStringOperators } from "@mui/x-data-grid";
 
 export const columns = [
     {
+        field: "img_src",
+        headerName: "Image",
+        width: 500,
+        renderCell: (params) => <img src={params.value} style={{height: "100%", width: "100%", objectFit: "contain"}}  />
+    },
+    {
         field: "id",
         headerName: "ID",
-        width: 150,
+        width: 100,
         filterOperators: getGridStringOperators().filter(
             (operator) => operator.value === "contains"
         ),
