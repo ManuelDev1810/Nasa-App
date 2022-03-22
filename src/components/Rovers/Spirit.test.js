@@ -48,7 +48,7 @@ describe("Spirit component", () => {
         //Assert
         expect(screen.getByText("301536")).toBeInTheDocument();
         expect(screen.getByText("1000")).toBeInTheDocument();
-        expect(screen.getByText("Navigation Camera")).toBeInTheDocument();
+        expect(screen.getByRole("img")).toHaveAttribute("src", "http://mars.nasa.gov/mer/gallery/all/2/n/1000/2N215136972EDNAS00P1585L0M1-BR.JPG");
         expect(screen.getByText("Spirit")).toBeInTheDocument();
     });
 });

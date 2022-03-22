@@ -41,13 +41,14 @@ export default function Spirit() {
                         label="Store Filters"
                     />
                     <DataGrid
-                        sx={{ width: 800 }}
+                        sx={{ width: 1300, height: 700 }}
                         rows={data.curiosities}
                         columns={columns}
                         filterMode="server"
                         onFilterModelChange={onFilterChange}
                         loading={loading}
                         pageSize={25}
+                        getRowHeight={({densityFactor }) => 500 * densityFactor}
                     />
                 </>
             ) : (

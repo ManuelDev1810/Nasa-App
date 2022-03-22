@@ -11,7 +11,7 @@ const InfoMessage = (props) => {
                 justifyContent: "center",
             }}
         >
-            <Stack sx={{ width: 800 }} spacing={2}>
+            <Stack sx={{ width: 1300 }} spacing={2}>
                 <Alert severity="info">{props.children}</Alert>
             </Stack>
         </Box>

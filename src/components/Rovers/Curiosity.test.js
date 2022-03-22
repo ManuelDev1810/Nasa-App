@@ -44,7 +44,7 @@ describe("Curiosity component", () => {
         //Assert
         expect(screen.getByText("654002")).toBeInTheDocument();
         expect(screen.getByText("2000")).toBeInTheDocument();
-        expect(screen.getByText("Front Hazard Avoidance Camera")).toBeInTheDocument();
+        expect(screen.getByRole("img")).toHaveAttribute("src", "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/02000/opgs/edr/fcam/FLB_575055503EDR_F0682626FHAZ00337M_.JPG");
         expect(screen.getByText("Curiosity")).toBeInTheDocument();
     });
 });

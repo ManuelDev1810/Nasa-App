@@ -44,9 +44,7 @@ describe("Opportunity component", () => {
         //Assert
         expect(screen.getByText("141044")).toBeInTheDocument();
         expect(screen.getByText("1000")).toBeInTheDocument();
-        expect(
-            screen.getByText("Navigation Camera")
-        ).toBeInTheDocument();
+        expect(screen.getByRole("img")).toHaveAttribute("src", "http://mars.nasa.gov/mer/gallery/all/1/n/1000/1N216958451EFF76ZFP1950L0M1-BR.JPG");
         expect(screen.getByText("Opportunity")).toBeInTheDocument();
     });
 });
